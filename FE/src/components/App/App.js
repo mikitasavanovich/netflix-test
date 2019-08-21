@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import SearchBar from '../SearchBar';
+import ShowsList from '../ShowsList';
 import { getShows } from '../../api/shows';
 
 import logo from '../../images/logo.png';
@@ -10,13 +11,13 @@ const App = () => {
   const [searchInProgress, setSearchInProgress] = useState(true);
   const [searchValues, setSearchValues] = useState({});
 
-  const fetchShows = async () => {
-    const shows = await getShows(searchValues);
-    setShows(shows);
-    setSearchInProgress(false);
-  }
-
   useEffect(() => {
+    const fetchShows = async () => {
+      const shows = await getShows(searchValues);
+      setShows(shows);
+      setSearchInProgress(false);
+    }
+
     if (searchInProgress) {
       fetchShows();
     }
@@ -34,6 +35,7 @@ const App = () => {
           searchValues={searchValues}
           setSearchValues={setSearchValues}
         />
+        <ShowsList shows={shows} />
       </div>
     </div>
   );
