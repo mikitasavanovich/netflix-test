@@ -29,6 +29,11 @@ const App = () => {
     }
 }, [searchInProgress]);
 
+  const searchForShows = () => {
+    setShows([]);
+    setSearchInProgress(true);
+  }
+
   return (
     <div className='app bg-dark'>
       <div className='container'>
@@ -37,13 +42,13 @@ const App = () => {
           <h2 className='text-white'>Netflix TV shows</h2>
         </div>
         <SearchBar
-          searchForShows={setSearchInProgress}
+          searchForShows={searchForShows}
           searchValues={searchValues}
           setSearchValues={setSearchValues}
         />
         <ShowsList
           hasMore={hasMore}
-          searchForShows={setSearchInProgress}
+          setSearchInProgress={setSearchInProgress}
           shows={shows}
         />
       </div>

@@ -3,14 +3,14 @@ import ShowCard from '../ShowCard';
 
 import './ShowsList.css';
 
-const ShowsList = ({ shows, hasMore, searchForShows }) => {
+const ShowsList = ({ shows, hasMore, setSearchInProgress }) => {
     const loadMore = ({ currentTarget }) => {
         if (!hasMore) {
             return;
         }
 
         if (currentTarget.scrollTop + currentTarget.clientHeight === currentTarget.scrollHeight) {
-            searchForShows(true);
+            setSearchInProgress(true);
         }
     }
     
