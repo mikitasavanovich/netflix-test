@@ -16,7 +16,7 @@ const ShowsList = ({ shows, hasMore, setSearchInProgress }) => {
     
     return (
         <div className='shows-list' onScroll={loadMore}>
-            {shows.map((show) => <ShowCard show={show} />)}
+            {shows.map((show) => <ShowCard key={show.title} show={show} />)}
         </div>
     );
 }

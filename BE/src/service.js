@@ -1,66 +1,32 @@
+const cache = require('memory-cache');
 const fetch = require('node-fetch');
+const filterShows = require('./utils/filterShows');
 
 const SHOWS_URL = 'http://54.172.194.177/tv.json';
+const DEFAULT_LIMIT = 15;
+const DEFAULT_OFFSET = 0;
 
-const getShows = async ({
-    title,
-    lowerThanRating,
-    higherThanRating,
-    releaseYear,
-    categories,
-    limit,
-    offset
-}) => {
-    const response = await fetch(SHOWS_URL);
-    const json = await response.json();
+const getShows = async (params, limit = DEFAULT_LIMIT, offset = DEFAULT_OFFSET) => {
+    const filteredShowsCacheKey = JSON.stringify(params);
+    let filteredShows = cache.get(filteredShowsCacheKey);
 
-    const filteredShows = json.filter((show) => {
-        const filterResults = [];
+    if (!filteredShows) {
+        let shows = cache.get('shows');
 
-        if (title) {
-            filterResults.push(
-                show.title.toLowerCase().includes(title.toLowerCase())
-            );
+        if (!shows) {
+            const response = await fetch(SHOWS_URL);
+            shows = await response.json();
         }
+        cache.put('shows', shows, 100000);
+        filteredShows = filterShows(shows, params);
+    }
+    cache.put(filteredShowsCacheKey, filteredShows, 10000);
 
-        const showRating = show.imdb
-            ? Number(show.imdb.split('/')[0])
-            : null;
-
-        if (!showRating && (lowerThanRating || higherThanRating)) {
-            filterResults.push(false);
-        } else if (showRating) {
-            lowerThanRating = lowerThanRating || 10;
-            higherThanRating = higherThanRating || 0;
-
-            filterResults.push(
-                showRating
-                    ? showRating >= higherThanRating
-                        && showRating <= lowerThanRating
-                    : false
-            );
-        }
-
-        if (releaseYear) {
-            const showReleaseYear = new Date(show.date_released).getFullYear();
-            filterResults.push(showReleaseYear === releaseYear);
-        }
-
-        if (categories && categories.length) {
-            const showCategories = show.category.split('\n').map((category) => category.trim());
-
-            const passed = categories.every((category) => showCategories.includes(category));
-            filterResults.push(passed);
-        }
-
-        return filterResults.every((result) => !!result);
-    });
-
-    const showsForPage = filteredShows.slice(offset, offset + limit);
+    const showsToSend = filteredShows.slice(offset, offset + limit);
     const hasMore = filteredShows.length > offset + limit;
 
     return {
-        shows: showsForPage,
+        shows: showsToSend,
         hasMore: true
     };
 }
