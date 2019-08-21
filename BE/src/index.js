@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const Koa = require('koa');
 const cors = require('@koa/cors');
 const router = require('./router');

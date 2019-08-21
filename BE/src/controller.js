@@ -6,7 +6,7 @@ const getShows = async (ctx) => {
         lowerThanRating: Number(ctx.query.max_rating),
         higherThanRating: Number(ctx.query.min_rating),
         releaseYear: Number(ctx.query.year),
-        categories: JSON.parse(ctx.query.categories || "[]")
+        categories: ctx.query.categories ? JSON.parse(ctx.query.categories) : []
     };
 
     const shows = await service.getShows(
