@@ -44,7 +44,7 @@ const getShows = async ({
             filterResults.push(showReleaseYear === releaseYear);
         }
 
-        if (categories) {
+        if (categories && categories.length) {
             const showCategories = show.category.split('\n').map((category) => category.trim());
 
             const passed = categories.every((category) => showCategories.includes(category));
