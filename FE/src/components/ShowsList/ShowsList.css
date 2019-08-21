@@ -1,4 +1,5 @@
 .shows-list {
+    box-shadow: 0 0 20px 0 red;
     display: grid;
     grid-gap: 30px 30px; 
     grid-template-columns: repeat(3, 1fr);

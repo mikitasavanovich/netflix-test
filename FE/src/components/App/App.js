@@ -10,11 +10,17 @@ const App = () => {
   const [shows, setShows] = useState([]);
   const [searchInProgress, setSearchInProgress] = useState(true);
   const [searchValues, setSearchValues] = useState({});
+  const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {
     const fetchShows = async () => {
-      const shows = await getShows(searchValues);
-      setShows(shows);
+      const offset = shows.length;
+      const result = await getShows(searchValues, offset);
+      setShows([
+        ...shows,
+        ...result.shows
+      ]);
+      setHasMore(result.hasMore);
       setSearchInProgress(false);
     }
 
@@ -35,7 +41,11 @@ const App = () => {
           searchValues={searchValues}
           setSearchValues={setSearchValues}
         />
-        <ShowsList shows={shows} />
+        <ShowsList
+          hasMore={hasMore}
+          searchForShows={setSearchInProgress}
+          shows={shows}
+        />
       </div>
     </div>
   );

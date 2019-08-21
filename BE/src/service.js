@@ -7,7 +7,9 @@ const getShows = async ({
     lowerThanRating,
     higherThanRating,
     releaseYear,
-    categories
+    categories,
+    limit,
+    offset
 }) => {
     const response = await fetch(SHOWS_URL);
     const json = await response.json();
@@ -54,7 +56,13 @@ const getShows = async ({
         return filterResults.every((result) => !!result);
     });
 
-    return filteredShows;
+    const showsForPage = filteredShows.slice(offset, offset + limit);
+    const hasMore = filteredShows.length > offset + limit;
+
+    return {
+        shows: showsForPage,
+        hasMore: true
+    };
 }
 
 module.exports = {
