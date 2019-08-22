@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import SearchBar from '../SearchBar';
 import ShowsList from '../ShowsList';
-import { getShows } from '../../api/shows';
+import { getShows } from '../../api';
 
 import logo from '../../images/logo.png';
 import './App.css';

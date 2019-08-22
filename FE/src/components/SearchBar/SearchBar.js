@@ -1,4 +1,5 @@
 import React from 'react';
+import CategoryInput from '../CategoryInput';
 
 const SearchBar = ({ searchForShows, setSearchValues, searchValues }) => {
     const changeFormValue = ({ target: input }) => {
@@ -32,6 +33,7 @@ const SearchBar = ({ searchForShows, setSearchValues, searchValues }) => {
                     <label className='text-white' htmlFor='release-year'>Release year</label>
                     <input type='text' className='form-control' id='release-year' name='releaseYear' onChange={changeFormValue} />
                 </div>
+                <CategoryInput />
             </div>
             <button type='submit' className='btn btn-light'>Apply filters</button>
         </form>

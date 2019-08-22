@@ -1,0 +1,17 @@
+.category-input {
+    position: relative;
+}
+
+.category-hint {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    font-size: 14px;
+    height: 200px;
+    overflow-y: auto;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+}
+
+.category-hint::-webkit-scrollbar { 
+    display: none; 
+}

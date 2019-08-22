@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = `${process.env.REACT_APP_API_URL}/api`;
 const NUMBER_OF_ITEMS_PER_PAGE = 15;
 
 export const getShows = async ({
@@ -17,10 +17,19 @@ export const getShows = async ({
         limit: NUMBER_OF_ITEMS_PER_PAGE,
         offset
     };
-    const requestUrl = `${API_URL}/api/shows?${$.param(searchParams)}`;
+    const requestUrl = `${API_URL}/shows?${$.param(searchParams)}`;
 
     const response = await fetch(requestUrl);
-    const json = await response.json();
+    const shows = await response.json();
 
-    return json;
+    return shows;
+}
+
+export const getCategories = async () => {
+    const requrestUrl = `${API_URL}/categories`;
+
+    const response = await fetch(requrestUrl);
+    const categories = await response.json();
+
+    return categories;
 }
