@@ -1,4 +1,24 @@
 .category-input {
+    align-items: center;
+    display: flex;
+    width: 47%;
+}
+
+.category-input div.form-group {
+    width: 100%;
+}
+
+.category-input .badge {
+    height: 18px;
+    margin: 0 4px;
+}
+
+.category-input .badge .badge-close {
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.category-input {
     position: relative;
 }
 
@@ -14,4 +34,8 @@
 
 .category-hint::-webkit-scrollbar { 
     display: none; 
+}
+
+.category-hint .list-group-item {
+    cursor: pointer;
 }
