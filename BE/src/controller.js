@@ -18,6 +18,13 @@ const getShows = async (ctx) => {
     ctx.body = shows;
 }
 
+const getCategories = async (ctx) => {
+    const categories = await service.getCategories();
+
+    ctx.body = categories;
+}
+
 module.exports = {
-    getShows
+    getShows,
+    getCategories
 };
