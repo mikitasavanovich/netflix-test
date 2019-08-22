@@ -2,9 +2,9 @@ const cache = require('memory-cache');
 const fetch = require('node-fetch');
 const filterShows = require('./utils/filterShows');
 
-const SHOWS_URL = 'http://54.172.194.177/tv.json';
+const SHOWS_URL = process.env.SHOWS_URL;
+const SHOWS_CACHE_TIMEOUT_MS = process.env.CACHE_TIMEOUT_MS; // 10 minutes;
 const SHOWS_CACHE_KEY = 'shows';
-const SHOWS_CACHE_TIMEOUT_MS = 600 * 1000; // 10 minutes;
 const DEFAULT_LIMIT = 15;
 const DEFAULT_OFFSET = 0;
 
