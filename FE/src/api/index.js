@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import createQueryString from '../utils/createQuerySting';
 
 const API_URL = `${process.env.REACT_APP_API_URL}/api`;

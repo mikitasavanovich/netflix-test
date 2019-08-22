@@ -34,8 +34,19 @@ const App = () => {
     setSearchInProgress(true);
   }
 
+  const loadMore = ({ currentTarget }) => {
+    console.log('hi', hasMore);
+    if (!hasMore) {
+        return;
+    }
+
+    if (currentTarget.scrollTop + currentTarget.clientHeight === currentTarget.scrollHeight) {
+        setSearchInProgress(true);
+    }
+}
+
   return (
-    <div className='app bg-dark'>
+    <div className='app bg-dark' onScroll={loadMore}>
       <div className='container'>
         <div className='logo'>
           <img src={logo} alt='Netflix logo' />

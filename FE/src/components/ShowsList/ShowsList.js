@@ -3,19 +3,9 @@ import ShowCard from '../ShowCard';
 
 import './ShowsList.css';
 
-const ShowsList = ({ shows, hasMore, setSearchInProgress }) => {
-    const loadMore = ({ currentTarget }) => {
-        if (!hasMore) {
-            return;
-        }
-
-        if (currentTarget.scrollTop + currentTarget.clientHeight === currentTarget.scrollHeight) {
-            setSearchInProgress(true);
-        }
-    }
-    
+const ShowsList = ({ shows, hasMore, setSearchInProgress }) => {    
     return (
-        <div className='shows-list' onScroll={loadMore}>
+        <div className='shows-list'>
             {shows.map((show) => <ShowCard key={show.title} show={show} />)}
         </div>
     );
