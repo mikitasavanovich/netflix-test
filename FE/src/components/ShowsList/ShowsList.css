@@ -4,3 +4,8 @@
     grid-template-columns: repeat(3, 1fr);
     margin-top: 20px;
 }
+
+.spinner-border {
+    left: 50%;
+    position: absolute;
+}

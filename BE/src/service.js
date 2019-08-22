@@ -3,7 +3,7 @@ const fetch = require('node-fetch');
 const filterShows = require('./utils/filterShows');
 
 const SHOWS_URL = process.env.SHOWS_URL;
-const SHOWS_CACHE_TIMEOUT_MS = process.env.CACHE_TIMEOUT_MS; // 10 minutes;
+const SHOWS_CACHE_TIMEOUT_MS = Number(process.env.CACHE_TIMEOUT_MS); // 10 minutes;
 const SHOWS_CACHE_KEY = 'shows';
 const DEFAULT_LIMIT = 15;
 const DEFAULT_OFFSET = 0;

@@ -18,7 +18,7 @@ const ShowCard = ({
                 <p className='card-text'>Release date {new Date(date_released).toLocaleDateString()}</p>
                 <p className='card-text'>
                     {categories.map((item) => (
-                        <span className='badge badge-secondary mx-1'>{item}</span>
+                        <span key={item} className='badge badge-secondary mx-1'>{item}</span>
                     ))}
                 </p>
             </div>
