@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const Koa = require('koa');
 const cors = require('@koa/cors');
+const morgan = require('koa-morgan');
 const router = require('./router');
 
 const PORT = process.env.PORT || 3000;
@@ -9,6 +10,7 @@ const PORT = process.env.PORT || 3000;
 const app = new Koa();
 
 app.use(cors());
+app.use(morgan('tiny'));
 app.use(async (ctx, next) => {
     try {
         await next();
